@@ -1,6 +1,6 @@
 import React from 'react'
-import { Box, useTheme, Typography } from "@mui/material"
-import { NavLink } from "react-router-dom"
+import { Box, useTheme, Typography, Link } from "@mui/material"
+
 
 const Navbar = () => {
     const theme = useTheme()
@@ -15,8 +15,8 @@ const Navbar = () => {
                 <Typography variant='h1' color={"primary"} fontWeight={"bold"} fontSize={"5rem"}>
                     AI-BOAT
                 </Typography>
-                <NavLink to="register" p={1}>Register</NavLink>
-                <NavLink to="login" p={2}>Login</NavLink>
+                <Link href='/register' style={{textDecoration:"none"}} p={1}>Register</Link>
+                <Link href='/login' style={{ textDecoration: "none" }} p={1}>Login</Link>
             </Box>
         </>
     )

@@ -39,7 +39,7 @@ exports.loginController = async (req, res, next) => {
         if (!isMatch) {
             return next(new errorResponce("Invalid Creditial", 401))
         }
-        sendToken(user, 201, res)
+        this.sendToken(user, 201, res)
     } catch (error) {
         console.log(error)
         next(error)
