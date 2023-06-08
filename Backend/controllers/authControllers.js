@@ -27,7 +27,7 @@ exports.registerController = async (req, res, next) => {
 exports.loginController = async (req, res, next) => {
     try {
         const { email, password } = req.body;
-        //validation
+        
         if (!email || !password) {
             return next(new errorResponse("Please provide email or password"));
         }
@@ -41,6 +41,7 @@ exports.loginController = async (req, res, next) => {
         }
         //res
         this.sendToken(user, 200, res);
+ 
     } catch (error) {
         console.log(error);
         next(error);

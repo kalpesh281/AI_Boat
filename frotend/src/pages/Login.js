@@ -15,7 +15,7 @@ import {
 
 const Login = () => {
   const theme = useTheme();
-  // const navigate=useNavigate()
+  const navigate=useNavigate()
   
   
   const isNotMobile = useMediaQuery("(min-width: 1000px)");
@@ -29,14 +29,11 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:8080/api/v1/auth/login", {  email, password });
-      if (data.token.accessToken){
-        localStorage.setItem("authToken",true)
-        console.log(data.token.accessToken)
-        toast.success("Login Successfully");
-        window.location.href("/")
-      }
-       
+      await axios.post("http://localhost:8080/api/v1/auth/login", { email, password });
+      toast.success("Login Successfully");
+      localStorage.setItem("authToken", true);
+      navigate("/"); 
+
     } catch (err) {
       console.log(error);
       if (err.response.data.error) {
