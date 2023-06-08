@@ -4,10 +4,10 @@ const { registerController, loginController, logoutController } = require("../co
 
 const router=express.Router()
 
-router.post('/register', registerController)
+router.post("/register", registerController)
 
-router.post('/login',loginController)
+router.post("/login", loginController)
 
-router.post('/logout',logoutController)
+router.post("/logout",logoutController)
 
 module.exports=router
