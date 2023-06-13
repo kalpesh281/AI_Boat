@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
+import { Link, } from "react-router-dom";
+// import toast from "react-hot-toast";
 import axios from "axios";
 import {
   Box,
@@ -11,28 +11,29 @@ import {
   Button,
   Alert,
   Collapse,
+  Card,
 } from "@mui/material";
 
 const Summary = () => {
   const theme = useTheme();
-  const navigate = useNavigate()
+  
 
 
   const isNotMobile = useMediaQuery("(min-width: 1000px)");
 
 
   const [text, setText] = useState("")
-  const[summary,setSummary]=useState("")
+  const [summary, setSummary] = useState("")
   const [error, setError] = useState("");
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const {data}=await axios.post("http://localhost:8080/api/v1/openai/summary", { text });
-      setSummary(data)
-     
-     
+      const { data } = await axios.post("http://localhost:8080/api/v1/openai/summary", { text });
+      console.log(data)
+      setSummary(data.summary)
+
 
     } catch (err) {
       console.log(error);
@@ -76,7 +77,7 @@ const Summary = () => {
               setText(e.target.value);
             }}
           />
-          
+
           <Button
             type="submit"
             fullWidth
@@ -91,6 +92,17 @@ const Summary = () => {
             Not This Tool? <Link to="/">Go Back</Link>
           </Typography>
         </form>
+        {summary ? (
+          <Card sx={{
+            mt: 4, border: 1, boxShadow: 0, height: "500px", borderRadius: 5,
+            borderColor: "natural.medium", bgcolor: "background.default"
+          }}><Typography>{summary}</Typography></Card>
+        ) : (<Card sx={{
+          mt: 4, border: 1, boxShadow: 0, height: "500px", borderRadius: 5,
+          borderColor: "natural.medium", bgcolor: "background.default"
+        }}><Typography  variant="h5" color="natural.main" 
+        sx={{textAlign:"center" , verticalAlign:"middle" ,lineHeight:"450px"}}
+         >Summary will Appear Here</Typography></Card>)}
       </Box>
     </>
   )

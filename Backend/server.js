@@ -17,13 +17,13 @@ connectDB();
 app.use(cors())
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(morgan('dev'))
-app.unsubscribe(errorHandler)
+app.use(errorHandler)
 app.use(express.json())
 
 const PORT=process.env.PORT || 8080
 
 app.use("/api/v1/auth",authRoutes)
-app.unsubscribe('api/v1/openai',require('./routes/openaiRoutes'))
+app.use("/api/v1/openai",require('./routes/openaiRoutes'))
 
  app.listen(PORT, () => {
     console.log(`Server Running in ${process.env.DEV_MODE} on ${PORT}`);
